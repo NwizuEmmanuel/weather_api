@@ -1,0 +1,33 @@
+{% extends "home/base.html" %}
+
+{% block title %}Weather App {% endblock title %}
+
+{% block body %}
+<h1>Weather App</h1>
+<form action="#" method="post">
+    <input type="search" name="search_location" id="search_location">
+    <input type="submit">
+</form>
+<p>{{ weather_address_timezone }}</p>
+<p>{{ weather_description }}</p>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Temperature</th>
+        <th>Precipitation</th>
+        <th>Humidity</th>
+        <th>Wind Speed</th>
+        <th>Description</th>
+    </tr>
+    {% for i in items %}
+    <tr>
+        <td>{{ date }}</td>
+        <td>{{ temp }}</td>
+        <td>{{ precip }}</td>
+        <td>{{ humidity }}</td>
+        <td>{{ windspeed }}</td>
+        <td>{{ description }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock body %}
