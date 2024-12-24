@@ -1,17 +1,15 @@
 from dotenv import load_dotenv
 import os
 import requests
-import json
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
-weather_location = "Lagos"
-api_url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{weather_location}?unitGroup=us&key={api_key}&contentType=json"
-api_request = requests.get(api_url)
 
-data = api_request.json()
+def get_weather_api(location):
+    api_url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}?unitGroup=us&key={api_key}&contentType=json"
+    api_request = requests.get(api_url)
 
-def get_weather_api():
+    data = api_request.json()
     units = {
         "windspeed": "km/h",
         "precip": "mm",

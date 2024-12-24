@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 *.pyo
 data.json
+.env
+db.sqlite3
+migrations/
