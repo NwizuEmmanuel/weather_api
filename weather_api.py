@@ -3,7 +3,7 @@ import os
 import requests
 
 load_dotenv()
-api_key = os.getenv("API_KEY")
+api_query = os.getenv("API_QUERY")
 units = {
         "windspeed": "km/h",
         "precip": "mm",
@@ -12,11 +12,10 @@ units = {
     }
 
 def get_weather_api(location):
-    api_url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}?unitGroup=us&key={api_key}&contentType=json"
     api_request = None
     error = None
     try:
-        api_request = requests.get(api_url)
+        api_request = requests.get(api_query)
     except Exception as e:
         error = e
 
