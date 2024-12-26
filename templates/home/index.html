@@ -1,34 +1,24 @@
-{% extends "home/base.html" %}
-
-{% block title %}Weather App {% endblock title %}
-
+{% extends "home/base.html" %} {% block title %}Weather App {% endblock title %}
 {% block body %}
 <h1>Weather App</h1>
-<form action="#" method="post">
-    <input type="search" name="weather_location" id="weather_location">
-    <input type="submit">
+<form action="/submit" method="post">
+  <input type="search" name="weather_location" id="weather_location" />
+  <input type="submit" />
 </form>
-<p>{{ resolvedAddress }}</p>
-<p>{{ timezone }}</p>
-<p>{{ description }}</p>
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Temperature</th>
-        <th>Precipitation</th>
-        <th>Humidity</th>
-        <th>Wind Speed</th>
-        <th>Description</th>
-    </tr>
-    {% for item in items %}
-    <tr>
-        <td>{{ item[datetime""] }}</td>
-        <td>{{ item["temp"] }}</td>
-        <td>{{ item["precip"] }}</td>
-        <td>{{ item["humidity"] }}</td>
-        <td>{{ item["windspeed"] }}</td>
-        <td>{{ item["description"] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+
+{% if data.api_data %}
+<p>{{ data.resolvedAddress }}</p>
+<p>{{ data.timezone }}</p>
+<p>{{ data.description }}</p>
+<p>{{ data.datetime }}</p>
+<p>{{ data.temp }}{{ units.temp }}</p>
+<p>{{ data.precip }}{{ units.precip }}</p>
+<p>{{ data.humidity }}{{ units.humidity }}</p>
+<p>{{ data.windspeed }}{{ units.windspeed }}</p>
+<p>{{ data.description }}</p>
+{% elif data.error %}
+    <p>{{ data.error }}</p>
+{% else %}
+<p>Nothing here. Enter a location to get weather forcast.</p>
+{% endif %}
 {% endblock body %}
