@@ -1,21 +1,31 @@
 {% extends "home/base.html" %} {% block title %}Weather App {% endblock title %}
 {% block body %}
 <h1>Weather App</h1>
-<form action="/submit" method="post">
-  <input type="search" name="weather_location" id="weather_location" />
+<form method="post">
+  <input type="search" name="weather_location" id="weather_location" required/>
   <input type="submit" />
 </form>
 
 {% if data.api_data %}
-<p>{{ data.resolvedAddress }}</p>
-<p>{{ data.timezone }}</p>
-<p>{{ data.description }}</p>
-<p>{{ data.datetime }}</p>
-<p>{{ data.temp }}{{ units.temp }}</p>
-<p>{{ data.precip }}{{ units.precip }}</p>
-<p>{{ data.humidity }}{{ units.humidity }}</p>
-<p>{{ data.windspeed }}{{ units.windspeed }}</p>
-<p>{{ data.description }}</p>
+<div class="card">
+  <p><span class="forecast-title">Address: </span>{{ data.api_data.resolvedAddress }}</p>
+  <p>Timezone: {{ data.api_data.timezone }}</p>
+  <table>
+    <tr>
+      <th>Temperature</th>
+      <th>Precipitation</th>
+      <th>Humidity</th>
+      <th>Windspeed</th>
+    </tr>
+    <tr>
+      <td>{{ data.api_data.temp }}{{ units.temp }}</td>
+      <td>{{ data.api_data.precip }}{{ units.precip }}</td>
+      <td>{{ data.api_data.humidity }}{{ units.humidity }}</td>
+      <td>{{ data.api_data.windspeed }}{{ units.windspeed }}</td>
+    </tr>
+  </table>
+  <p>Description: {{ data.api_data.description }}</p>
+</div>
 {% elif data.error %}
     <p>{{ data.error }}</p>
 {% else %}
