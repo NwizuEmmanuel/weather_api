@@ -1,19 +1,7 @@
 from dotenv import load_dotenv
 import os
-import redis.client
 import requests
 import redis
-import json
-
-redis_hostname = os.getenv("HOSTNAME")
-redis_port = os.getenv("PORT")
-redis_db = os.getenv("DB")
-
-r = redis.Redis(
-    host=redis_hostname,
-    port=redis_port,
-    db=redis_db
-)
 
 load_dotenv() # load environment variables
 api_key = os.getenv("API_KEY") # get api key
@@ -56,12 +44,5 @@ def get_weather_api(location):
         "humidity": today_data["humidity"],
         "windspeed": today_data["windspeed"],
     }
-    json_string = json.dumps(api_data)
-    r.sadd("weather_api", json_string)
-    cache_data = r.smembers("weather_api")
     
-    json_data_from_cache = json.loads(cache_data)
-    return {"api_data": json_data_from_cache, "error": None}
-
-def save_to_cache():
-    r.sadd("weather_api", get_weather_api())
+    return {"api_data": api_data, "error": None}
