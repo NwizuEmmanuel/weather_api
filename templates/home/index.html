@@ -2,33 +2,31 @@
 {% block body %}
 <h1>Weather App</h1>
 <form method="post">
-  <input type="search" name="weather_location" id="weather_location" required/>
+  <input type="search" name="weather_location" id="weather_location" required />
   <input type="submit" />
 </form>
+<a href="/clear">clear recent forecast</a>
 
-{% if data.api_data %}
-<div class="card">
-  <p><span class="forecast-title">Address: </span>{{ data.api_data.resolvedAddress }}</p>
-  <p>Timezone: {{ data.api_data.timezone }}</p>
-  <table>
-    <tr>
-      <th>Temperature</th>
-      <th>Precipitation</th>
-      <th>Humidity</th>
-      <th>Windspeed</th>
-    </tr>
-    <tr>
-      <td>{{ data.api_data.temp }}{{ units.temp }}</td>
-      <td>{{ data.api_data.precip }}{{ units.precip }}</td>
-      <td>{{ data.api_data.humidity }}{{ units.humidity }}</td>
-      <td>{{ data.api_data.windspeed }}{{ units.windspeed }}</td>
-    </tr>
-  </table>
-  <p>Description: {{ data.api_data.description }}</p>
+<div class="card-board">
+  {% if data %} {% for item in data%}
+  <div class="card">
+    <h3>Address</h3>
+    <p>{{ item.resolvedAddress }}</p>
+    <h3>Temperature</h3>
+    <p>{{ item.temp }}{{ units.temp }}</p>
+    <h3>Precipitation</h3>
+    <p>{{ item.precip }}{{ units.precip }}</p>
+    <h3>Humidity</h3>
+    <p>{{ item.humidity }}{{ units.humidity }}</p>
+    <h3>Windspeed</h3>
+    <p>{{ item.windspeed }}{{ units.windspeed }}</p>
+    <h3>Description</h3>
+    <p>{{ item.description }}</p>
+  </div>
+  {% endfor %}
 </div>
-{% elif data.error %}
-    <p>{{ data.error }}</p>
+{% elif error_mssg %}
+<p>{{ error_mssg }}</p>
 {% else %}
 <p>Nothing here. Enter a location to get weather forcast.</p>
-{% endif %}
-{% endblock body %}
+{% endif %} {% endblock body %}

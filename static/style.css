@@ -1,5 +1,6 @@
 body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 0.9rem;
 }
 
 .forecast-title{
@@ -8,8 +9,12 @@ body{
 }
 
 .card{
-    width: 3rem;
-    height: 4rem;
-    background-color: blueviolet;
-    color: white;
+    background-color: rgb(104, 177, 104);
+    padding: 1rem;
+}
+
+.card-board{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
